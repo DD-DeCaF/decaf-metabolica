@@ -56,6 +56,7 @@ module.exports = function () {
                         path.resolve(__dirname, 'src'),
                         path.dirname(require.resolve('metabolica')),
                         path.dirname(require.resolve('metabolica-core')),
+                        path.dirname(require.resolve('metabolica-viz')),
                         path.dirname(require.resolve('module-pathways')),
                         path.dirname(require.resolve('module-theoretical-yield')),
                         path.dirname(require.resolve('module-interactive-map')),
@@ -72,7 +73,8 @@ module.exports = function () {
                         path.resolve(__dirname, 'src'),
                         path.dirname(require.resolve('metabolica')),
                         path.dirname(require.resolve('metabolica-core')),
-                        path.dirname(require.resolve('metabolica-variants'))
+                        path.dirname(require.resolve('metabolica-variants')),
+                        path.dirname(require.resolve('metabolica-viz'))
                     ],
                     loader: 'babel-loader',
                     query: {

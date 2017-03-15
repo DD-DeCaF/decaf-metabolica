@@ -12,7 +12,7 @@
     "module-pathways": "github:DD-DeCaF/module-pathways#iloop-component",
     "module-theoretical-yield": "github:DD-DeCaF/module-theoretical-yield#iloop-component",
     "module-interactive-map": "github:DD-DeCaF/pathway-vis#iloop-component",
-    "module-upload": "github:DD-DeCaF/upload-frontend#iloop-component",
+    "metabolica-upload": "github:DD-DeCaF/metabolica-ui-upload#iloop-component",
     "metabolica-about": "github:DD-DeCaF/metabolica-ui-about"
   },
   "scripts": {

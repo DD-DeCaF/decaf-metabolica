@@ -12,8 +12,8 @@ import {VariantsModule} from 'metabolica-variants';
 import {VizModule} from 'metabolica-viz';
 import {PathwaysModule} from 'module-pathways';
 import {TheoreticalYieldModule} from 'module-theoretical-yield';
-import {PathwayVisModule} from 'module-interactive-map';
-import {UploadModule} from 'metabolica-upload';
+import {PathwayVisModule} from 'metabolica-map';
+import {UploadModule} from 'module-upload';
 import {AboutModule} from 'metabolica-about';
 
 

@@ -59,7 +59,7 @@ module.exports = function () {
                         path.dirname(require.resolve('metabolica-viz')),
                         path.dirname(require.resolve('module-pathways')),
                         path.dirname(require.resolve('module-theoretical-yield')),
-                        path.dirname(require.resolve('module-interactive-map')),
+                        path.dirname(require.resolve('metabolica-map')),
                         path.dirname(require.resolve('module-upload'))
                     ],
                     options: {

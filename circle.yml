@@ -17,11 +17,11 @@ deployment:
   production:
     branch: master
     commands:
-      - "docker login -u=$DOCKER_USERNAME -p=$DOCKER_PASSWORD"
+      - "docker login -u=$DOCKER_USERNAME -p=$DOCKER_PASSWORD -e=$DOCKER_EMAIL"
       - "./push_to_hub.sh"
   staging:
     branch: staging
     commands:
-      - "docker login -u=$DOCKER_USERNAME -p=$DOCKER_PASSWORD"
+      - "docker login -u=$DOCKER_USERNAME -p=$DOCKER_PASSWORD -e=$DOCKER_EMAIL"
       - "./push_to_hub.sh"
 

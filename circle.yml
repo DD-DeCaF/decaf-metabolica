@@ -19,3 +19,9 @@ deployment:
     commands:
       - "docker login -u=$DOCKER_USERNAME -p=$DOCKER_PASSWORD"
       - "./push_to_hub.sh"
+  staging:
+    branch: staging
+    commands:
+      - "docker login -u=$DOCKER_USERNAME -p=$DOCKER_PASSWORD"
+      - "./push_to_hub.sh"
+

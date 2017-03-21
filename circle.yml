@@ -1,0 +1,21 @@
+machine:
+  services:
+    - docker
+  node:
+    version: 7.0.0
+dependencies:
+  override:
+    - "docker info"
+    - "npm install --no-optional"
+    - "npm update"
+    - "npm prune"
+    - "npm run build"
+test:
+  override:
+    - "echo 'You shall pass!'"
+deployment:
+  production:
+    branch: master
+    commands:
+      - "docker login -u=$DOCKER_USERNAME -p=$DOCKER_PASSWORD"
+      - "./push_to_hub.sh"

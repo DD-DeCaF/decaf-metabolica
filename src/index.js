@@ -10,10 +10,10 @@ import {MediaModule} from 'metabolica-core';
 
 import {VariantsModule} from 'metabolica-variants';
 import {VizModule} from 'metabolica-viz';
-import {PathwaysModule} from 'module-pathways';
-import {TheoreticalYieldModule} from 'module-theoretical-yield';
+import {PathwaysModule} from 'metabolica-pathways';
+import {TheoreticalYieldModule} from 'metabolica-yields';
 import {PathwayVisModule} from 'metabolica-map';
-import {UploadModule} from 'module-upload';
+import {UploadModule} from 'metabolica-upload';
 import {AboutModule} from 'metabolica-about';
 
 

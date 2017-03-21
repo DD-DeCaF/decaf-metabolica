@@ -3,7 +3,7 @@ set -ev
 REPO="dddecaf/decaf-metabolica"
 GIT_MASTER_HEAD_SHA=$(git rev-parse --short=12 --verify HEAD)
 BRANCH=${TRAVIS_BRANCH:=$(git symbolic-ref --short HEAD)}
-docker build --build-arg GITHUB_AUTH_TOKEN=$GITHUB_AUTH_TOKEN -f Dockerfile -t $REPO:$BRANCH .
+docker build -f Dockerfile -t $REPO:$BRANCH .
 docker tag $REPO:$BRANCH $REPO:$GIT_MASTER_HEAD_SHA
 docker push $REPO:$BRANCH
 docker push $REPO:$GIT_MASTER_HEAD_SHA

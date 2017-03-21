@@ -57,10 +57,11 @@ module.exports = function () {
                         path.dirname(require.resolve('metabolica')),
                         path.dirname(require.resolve('metabolica-core')),
                         path.dirname(require.resolve('metabolica-viz')),
-                        path.dirname(require.resolve('module-pathways')),
-                        path.dirname(require.resolve('module-theoretical-yield')),
+                        path.dirname(require.resolve('metabolica-pathways')),
+                        path.dirname(require.resolve('metabolica-yields')),
                         path.dirname(require.resolve('metabolica-map')),
-                        path.dirname(require.resolve('module-upload'))
+                        path.dirname(require.resolve('metabolica-upload')),
+                        path.dirname(require.resolve('metabolica-about'))
                     ],
                     options: {
                         transpileOnly: true,  // FIXME hack for prototyping purposes because dependencies are broken
@@ -74,7 +75,8 @@ module.exports = function () {
                         path.dirname(require.resolve('metabolica')),
                         path.dirname(require.resolve('metabolica-core')),
                         path.dirname(require.resolve('metabolica-variants')),
-                        path.dirname(require.resolve('metabolica-viz'))
+                        path.dirname(require.resolve('metabolica-viz')),
+                        path.dirname(require.resolve('metabolica-about'))
                     ],
                     loader: 'babel-loader',
                     query: {

@@ -9,7 +9,7 @@
     "metabolica-core": "github:biosustain/metabolica-ui-core",
     "metabolica-variants": "github:biosustain/metabolica-ui-variants",
     "metabolica-viz": "github:biosustain/metabolica-ui-viz",
-    "metabolica-map": "github:DD-DeCaF/metabolica-ui-map",
+    "metabolica-map": "github:DD-DeCaF/metabolica-ui-map#devel",
     "metabolica-pathways": "github:DD-DeCaF/metabolica-ui-pathways",
     "metabolica-yields": "github:DD-DeCaF/metabolica-ui-yields",
     "metabolica-upload": "github:DD-DeCaF/metabolica-ui-upload",

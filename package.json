@@ -9,10 +9,10 @@
     "metabolica-core": "github:biosustain/metabolica-ui-core",
     "metabolica-variants": "github:biosustain/metabolica-ui-variants",
     "metabolica-viz": "github:biosustain/metabolica-ui-viz",
-    "module-pathways": "github:DD-DeCaF/metabolica-ui-pathways",
-    "module-theoretical-yield": "github:DD-DeCaF/metabolica-ui-yields",
+    "metabolica-pathways": "github:DD-DeCaF/metabolica-ui-pathways",
+    "metabolica-yields": "github:DD-DeCaF/metabolica-ui-yields",
     "metabolica-map": "github:DD-DeCaF/metabolica-ui-map",
-    "module-upload": "github:DD-DeCaF/metabolica-ui-upload",
+    "metabolica-upload": "github:DD-DeCaF/metabolica-ui-upload",
     "metabolica-about": "github:DD-DeCaF/metabolica-ui-about"
   },
   "scripts": {

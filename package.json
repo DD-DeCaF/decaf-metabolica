@@ -12,7 +12,7 @@
     "metabolica-map": "github:DD-DeCaF/metabolica-ui-map#devel",
     "metabolica-pathways": "github:DD-DeCaF/metabolica-ui-pathways#devel",
     "metabolica-yields": "github:DD-DeCaF/metabolica-ui-yields#devel",
-    "metabolica-upload": "github:DD-DeCaF/metabolica-ui-upload",
+    "metabolica-upload": "github:DD-DeCaF/metabolica-ui-upload#devel",
     "metabolica-about": "github:DD-DeCaF/metabolica-ui-about#devel"
   },
   "scripts": {

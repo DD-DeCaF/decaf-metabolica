@@ -33,8 +33,9 @@ export const DecafAppModule = angular.module('DecafApp', [
     TheoreticalYieldModule.name,
     PathwayVisModule.name,
     AboutModule.name
-]).config(function (appNameProvider, potionProvider, decafAPIProvider) {
+]).config(function (appNameProvider, appAuthProvider, potionProvider, decafAPIProvider) {
     appNameProvider.name = 'DD-DeCaF';
+    appAuthProvider.isRequired = false;
     potionProvider.config({host: 'https://data.dd-decaf.eu', prefix: '/api'});
     decafAPIProvider.host = 'https://api.dd-decaf.eu';
 });

@@ -30,7 +30,10 @@ module.exports = function () {
                 inject: 'head',
                 template: './src/index.html',
                 filename: 'index.html'
-            })
+            }),
+            new webpack.ProvidePlugin({
+				$: "jquery"
+			})
         ],
         module: {
             rules: [

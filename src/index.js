@@ -38,8 +38,7 @@ export const DecafAppModule = angular.module('DecafApp', [
 ]).config(function (appNameProvider, appAuthProvider, potionProvider, decafAPIProvider, modelWSProvider, modelAPIProvider) {
     appNameProvider.name = 'DD-DeCaF';
     appAuthProvider.isRequired = false;
-    // potionProvider.config({host: 'https://iloop-staging.dd-decaf.eu', prefix: '/api'});
-    potionProvider.config({host: 'http://localhost', prefix: '/api'});
+    potionProvider.config({host: 'https://iloop-staging.dd-decaf.eu', prefix: '/api'});
     decafAPIProvider.host = 'https://api-staging.dd-decaf.eu';
     modelAPIProvider.host = 'https://api-staging.dd-decaf.eu';
     modelWSProvider.host = 'wss://api-staging.dd-decaf.eu';

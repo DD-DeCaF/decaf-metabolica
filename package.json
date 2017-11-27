@@ -6,15 +6,16 @@
   "dependencies": {
     "angular": "^1.6.2",
     "metabolica": "github:biosustain/metabolica-ui",
+    "metabolica-about": "github:DD-DeCaF/metabolica-ui-about#devel",
     "metabolica-core": "github:biosustain/metabolica-ui-core",
-    "metabolica-variants": "github:biosustain/metabolica-ui-variants",
-    "metabolica-viz": "github:biosustain/metabolica-ui-viz",
+    "metabolica-login": "github:DD-DeCaF/metabolica-ui-login#devel",
     "metabolica-map": "github:DD-DeCaF/metabolica-ui-map#devel",
     "metabolica-pathways": "github:DD-DeCaF/metabolica-ui-pathways#devel",
-    "metabolica-yields": "github:DD-DeCaF/metabolica-ui-yields#devel",
     "metabolica-upload": "github:DD-DeCaF/metabolica-ui-upload#devel",
-    "metabolica-about": "github:DD-DeCaF/metabolica-ui-about#devel",
-    "metabolica-login": "github:DD-DeCaF/metabolica-ui-login#devel"
+    "metabolica-variants": "github:biosustain/metabolica-ui-variants",
+    "metabolica-viz": "github:biosustain/metabolica-ui-viz",
+    "metabolica-yields": "github:DD-DeCaF/metabolica-ui-yields#devel",
+    "raven-js": "^3.20.1"
   },
   "scripts": {
     "build": "webpack",

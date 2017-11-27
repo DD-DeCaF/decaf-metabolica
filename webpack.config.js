@@ -31,14 +31,14 @@ module.exports = function () {
                 template: './src/index.html',
                 filename: 'index.html'
             }),
-            new webpack.EnvironmentPlugin([
-                'FIREBASE_API_KEY',
-                'FIREBASE_AUTH_DOMAIN',
-                'FIREBASE_DATABASE_URL',
-                'FIREBASE_PROJECT_ID',
-                'FIREBASE_STORAGE_BUCKET',
-                'FIREBASE_SENDER_ID'
-            ])
+            new webpack.EnvironmentPlugin({
+                FIREBASE_API_KEY: '""',
+                FIREBASE_AUTH_DOMAIN: '""',
+                FIREBASE_DATABASE_URL: '""',
+                FIREBASE_PROJECT_ID: '""',
+                FIREBASE_STORAGE_BUCKET: '""',
+                FIREBASE_SENDER_ID: '""',
+            })
         ],
         module: {
             rules: [

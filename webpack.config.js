@@ -38,6 +38,7 @@ module.exports = function () {
                 FIREBASE_PROJECT_ID: '""',
                 FIREBASE_STORAGE_BUCKET: '""',
                 FIREBASE_SENDER_ID: '""',
+                SENTRY_DSN: '""',
             })
         ],
         module: {

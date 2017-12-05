@@ -30,6 +30,15 @@ module.exports = function () {
                 inject: 'head',
                 template: './src/index.html',
                 filename: 'index.html'
+            }),
+            new webpack.EnvironmentPlugin({
+                FIREBASE_API_KEY: '""',
+                FIREBASE_AUTH_DOMAIN: '""',
+                FIREBASE_DATABASE_URL: '""',
+                FIREBASE_PROJECT_ID: '""',
+                FIREBASE_STORAGE_BUCKET: '""',
+                FIREBASE_SENDER_ID: '""',
+                SENTRY_DSN: '""',
             })
         ],
         module: {
@@ -54,6 +63,7 @@ module.exports = function () {
                     loader: "ts-loader",
                     include: [
                         path.resolve(__dirname, 'src'),
+                        __dirname,
                         path.dirname(require.resolve('metabolica')),
                         path.dirname(require.resolve('metabolica-core')),
                         path.dirname(require.resolve('metabolica-variants')),
@@ -66,7 +76,7 @@ module.exports = function () {
                     ],
                     options: {
                         transpileOnly: true,  // FIXME hack for prototyping purposes because dependencies are broken
-                        isolatedModules: true
+                        compilerOptions: {isolatedModules: true}
                     }
                 },
                 {
@@ -85,7 +95,7 @@ module.exports = function () {
                     ],
                     loader: 'babel-loader',
                     query: {
-                        presets: ['es2015', 'stage-0'],
+                        presets: ['es2015', 'stage-0', 'es2017'],
                         plugins: [
                             'transform-runtime'
                         ]
@@ -106,7 +116,7 @@ module.exports = function () {
             proxy: {
                 '/api': {
                     // Set the following line to the address of the API you want to test against:
-                    target: 'https://data.dd-decaf.eu',
+                    target: 'https://iloop-staging.dd-decaf.eu',
                     secure: false,
                     changeOrigin: true
                 }

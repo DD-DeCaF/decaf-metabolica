@@ -1,3 +1,5 @@
+import Raven from 'raven-js';
+
 import {AppModule} from 'metabolica';
 import {MaintenanceModule} from 'metabolica/src/app/shared/maintenance/maintenance.module';
 
@@ -15,9 +17,10 @@ import {TheoreticalYieldModule} from 'metabolica-yields';
 import {PathwayVisModule} from 'metabolica-map';
 import {UploadModule} from 'metabolica-upload';
 import {AboutModule} from 'metabolica-about';
+import {LoginModule} from 'metabolica-login';
 
 
-export const DecafAppModule = angular.module('DecafApp', [
+const DecafAppModule = angular.module('DecafApp', [
     AppModule.name,
     MaintenanceModule.name,
     ProjectModule.name,
@@ -32,13 +35,48 @@ export const DecafAppModule = angular.module('DecafApp', [
     PathwaysModule.name,
     TheoreticalYieldModule.name,
     PathwayVisModule.name,
+    LoginModule.name,
     AboutModule.name
-]).config(function (appNameProvider, appAuthProvider, potionProvider, decafAPIProvider, modelWSProvider, modelAPIProvider) {
+]);
+
+if (process.env.SENTRY_DSN) {
+    Raven.config(process.env.SENTRY_DSN).install();
+    Raven.addPlugin(require('raven-js/plugins/angular'), angular);
+    DecafAppModule.requires.push('ngRaven');
+}
+
+DecafAppModule.config(function (appNameProvider, appAuthProvider, potionProvider, decafAPIProvider, modelWSProvider, modelAPIProvider) {
     appNameProvider.name = 'DD-DeCaF';
     appAuthProvider.isRequired = false;
-    potionProvider.config({host: 'https://data.dd-decaf.eu', prefix: '/api'});
-    decafAPIProvider.host = 'https://api.dd-decaf.eu';
-    modelAPIProvider.host = 'https://api.dd-decaf.eu';
-    modelWSProvider.host = 'wss://api.dd-decaf.eu';
+    appAuthProvider.trustedURLs.add('https://iloop-staging.dd-decaf.eu');
+    appAuthProvider.trustedURLs.add('https://data.dd-decaf.eu');
+    appAuthProvider.trustedURLs.add('https://api.dd-decaf.eu');
+    appAuthProvider.trustedURLs.add('https://api-staging.dd-decaf.eu');
+    appAuthProvider.trustedURLs.add('http://localhost');
+    potionProvider.config({host: 'https://iloop-staging.dd-decaf.eu', prefix: '/api'});
+    decafAPIProvider.host = 'https://api-staging.dd-decaf.eu';
+    modelAPIProvider.host = 'https://api-staging.dd-decaf.eu';
+    modelWSProvider.host = 'wss://api-staging.dd-decaf.eu';
     modelWSProvider.prefix = '/wsmodels';
+}).run(($rootScope, Session) => {
+    if (process.env.SENTRY_DSN) {
+        const setRavenUser = () => {
+            Session.getCurrentUser()
+                .then((user) => {
+                    Raven.setUser({
+                        id: user.id,
+                        email: user.username,
+                    })
+                });
+        };
+        if (Session.isAuthenticated()) {
+            setRavenUser();
+        }
+        $rootScope.$on('session:login', setRavenUser);
+        $rootScope.$on('session:logout', () => {
+            Raven.setUserContext();
+        });
+    }
 });
+
+export {DecafAppModule};

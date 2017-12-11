@@ -19,6 +19,8 @@ import {UploadModule} from 'metabolica-upload';
 import {AboutModule} from 'metabolica-about';
 import {LoginModule} from 'metabolica-login';
 
+import './style.scss';
+
 
 const DecafAppModule = angular.module('DecafApp', [
     AppModule.name,

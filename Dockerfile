@@ -1,6 +1,6 @@
 FROM node:latest
-RUN mkdir /usr/share/frontend
-ADD . /usr/share/frontend
-WORKDIR /usr/share/frontend
+RUN mkdir /usr/share/frontend-test
+ADD . /usr/share/frontend-test
+WORKDIR /usr/share/frontend-test
 
-RUN chmod -R 755 /usr/share/frontend/dist
+RUN chmod -R 755 /usr/share/frontend-test/dist

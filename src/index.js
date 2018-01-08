@@ -47,7 +47,7 @@ if (process.env.SENTRY_DSN) {
     DecafAppModule.requires.push('ngRaven');
 }
 
-DecafAppModule.config(function (appNameProvider, appAuthProvider, potionProvider, decafAPIProvider, modelWSProvider, modelAPIProvider) {
+DecafAppModule.config((appNameProvider, appAuthProvider, potionProvider, decafAPIProvider, modelWSProvider, modelAPIProvider, pathwaysAPIProvider, pathwaysWSProvider) => {
     appNameProvider.name = 'DD-DeCaF';
     appAuthProvider.isRequired = false;
     appAuthProvider.trustedURLs.add('https://iloop-staging.dd-decaf.eu');
@@ -60,6 +60,9 @@ DecafAppModule.config(function (appNameProvider, appAuthProvider, potionProvider
     modelAPIProvider.host = 'https://api-staging.dd-decaf.eu';
     modelWSProvider.host = 'wss://api-staging.dd-decaf.eu';
     modelWSProvider.prefix = '/wsmodels';
+    pathwaysAPIProvider.host = 'https://api-staging.dd-decaf.eu/pathways';
+    pathwaysWSProvider.host = 'wss://api-staging.dd-decaf.eu/pathways';
+
 }).run(($rootScope, Session) => {
     if (process.env.SENTRY_DSN) {
         const setRavenUser = () => {

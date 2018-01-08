@@ -32,13 +32,13 @@ module.exports = function () {
                 filename: 'index.html'
             }),
             new webpack.EnvironmentPlugin({
-                FIREBASE_API_KEY: '""',
-                FIREBASE_AUTH_DOMAIN: '""',
-                FIREBASE_DATABASE_URL: '""',
-                FIREBASE_PROJECT_ID: '""',
-                FIREBASE_STORAGE_BUCKET: '""',
-                FIREBASE_SENDER_ID: '""',
-                SENTRY_DSN: '""',
+                FIREBASE_API_KEY: '',
+                FIREBASE_AUTH_DOMAIN: '',
+                FIREBASE_DATABASE_URL: '',
+                FIREBASE_PROJECT_ID: '',
+                FIREBASE_STORAGE_BUCKET: '',
+                FIREBASE_SENDER_ID: '',
+                SENTRY_DSN: '',
             })
         ],
         module: {

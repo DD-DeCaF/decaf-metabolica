@@ -36,11 +36,11 @@ The side panel on the left provides the user with additional information (for ex
 
 <img src="gifs/side-panel-medium-simulation-methods.gif" alt="Reaction knockout" width="650">
 
-Computationally more extensive methods can be chose to get uncertainty estimates for the predicted fluxes. For example, pFBA-FVA combines [pFBA](http://cobramethods.wikidot.com/pfba) with [FVA](http://cobramethods.wikidot.com/flux-variability-analysis) (_flux variability analysis_). Uncertain flux are highlighted using transperancy.
+Computationally more extensive methods can be chosen to get uncertainty estimates for the predicted fluxes. For example, pFBA-FVA combines [pFBA](http://cobramethods.wikidot.com/pfba) with [FVA](http://cobramethods.wikidot.com/flux-variability-analysis) (_flux variability analysis_). Uncertain flux are highlighted using transparency.
 
 <img src="gifs/pfba-fva.gif" alt="Reaction knockout" width="650">
 
-The side panel furthermore provides a selection of different pathway maps he user can explore other parts of metabolism for example (amino acid biosynthesis).
+The side panel furthermore provides a selection of different pathway maps the user can explore other parts of metabolism for example (amino acid biosynthesis).
 
 <img src="gifs/amino-acids-pathway.gif" alt="Select amino acid biosynthesis map" width="650">
 

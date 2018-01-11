@@ -47,7 +47,16 @@ if (process.env.SENTRY_DSN) {
     DecafAppModule.requires.push('ngRaven');
 }
 
-DecafAppModule.config((appNameProvider, appAuthProvider, potionProvider, decafAPIProvider, modelWSProvider, modelAPIProvider, pathwaysAPIProvider, pathwaysWSProvider) => {
+function noAuth(appNavigationProvider, moduleName) {
+    let el = appNavigationProvider.navigation.filter((el) => {return el.title === moduleName;})[0];
+    el.authRequired = false;
+}
+
+DecafAppModule.config((appNameProvider, appNavigationProvider, appAuthProvider, potionProvider, decafAPIProvider, modelWSProvider, modelAPIProvider, pathwaysAPIProvider, pathwaysWSProvider) => {
+    noAuth(appNavigationProvider, 'Experiments');
+    noAuth(appNavigationProvider, 'Pools');
+    noAuth(appNavigationProvider, 'Media');
+
     appNameProvider.name = 'DD-DeCaF';
     appAuthProvider.isRequired = false;
     appAuthProvider.trustedURLs.add('https://iloop-staging.dd-decaf.eu');
@@ -68,7 +77,7 @@ DecafAppModule.config((appNameProvider, appAuthProvider, potionProvider, decafAP
         'localhost': 'light-green',
         'app.dd-decaf.eu': 'light-blue',
         'staging.dd-decaf.eu': 'amber',
-    }
+    };
     const color = hostname2ColorScheme[window.location.hostname] || 'light-blue';
     $mdThemingProvider.theme('default')
         .primaryPalette(color, {
@@ -77,7 +86,7 @@ DecafAppModule.config((appNameProvider, appAuthProvider, potionProvider, decafAP
         .accentPalette(color, {
             'default': '400',
         });
-}).run(($rootScope, Session) => {
+}).run(($rootScope, $localStorage, Session) => {
     if (process.env.SENTRY_DSN) {
         const setRavenUser = () => {
             Session.getCurrentUser()
@@ -90,10 +99,13 @@ DecafAppModule.config((appNameProvider, appAuthProvider, potionProvider, decafAP
         };
         if (Session.isAuthenticated()) {
             setRavenUser();
+        } else {
+            $localStorage.sessionJWT = process.env.GUEST_TOKEN;
         }
         $rootScope.$on('session:login', setRavenUser);
         $rootScope.$on('session:logout', () => {
             Raven.setUserContext();
+            $localStorage.sessionJWT = process.env.GUEST_TOKEN;
         });
     }
 });

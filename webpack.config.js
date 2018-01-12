@@ -39,6 +39,7 @@ module.exports = function () {
                 FIREBASE_STORAGE_BUCKET: '',
                 FIREBASE_SENDER_ID: '',
                 SENTRY_DSN: '',
+                GUEST_TOKEN: '',
             })
         ],
         module: {

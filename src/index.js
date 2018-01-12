@@ -47,7 +47,15 @@ if (process.env.SENTRY_DSN) {
     DecafAppModule.requires.push('ngRaven');
 }
 
-DecafAppModule.config((appNameProvider, appAuthProvider, potionProvider, decafAPIProvider, modelWSProvider, modelAPIProvider, pathwaysAPIProvider, pathwaysWSProvider) => {
+
+DecafAppModule.config((appNameProvider, appAuthProvider, potionProvider, decafAPIProvider, modelWSProvider, modelAPIProvider, appNavigationProvider, pathwaysAPIProvider, pathwaysWSProvider) => {
+    const noAuthModules = ['Experiments', 'Pools', 'Media'];
+    appNavigationProvider.navigation
+      .filter((app) => noAuthModules.includes(app.title))
+      .forEach((el) => {
+       el.authRequired = false;
+     });
+
     appNameProvider.name = 'DD-DeCaF';
     appAuthProvider.isRequired = false;
     appAuthProvider.trustedURLs.add('https://iloop-staging.dd-decaf.eu');
@@ -68,7 +76,7 @@ DecafAppModule.config((appNameProvider, appAuthProvider, potionProvider, decafAP
         'localhost': 'light-green',
         'app.dd-decaf.eu': 'light-blue',
         'staging.dd-decaf.eu': 'amber',
-    }
+    };
     const color = hostname2ColorScheme[window.location.hostname] || 'light-blue';
     $mdThemingProvider.theme('default')
         .primaryPalette(color, {
@@ -77,7 +85,7 @@ DecafAppModule.config((appNameProvider, appAuthProvider, potionProvider, decafAP
         .accentPalette(color, {
             'default': '400',
         });
-}).run(($rootScope, Session) => {
+}).run(($rootScope, $window, Session) => {
     if (process.env.SENTRY_DSN) {
         const setRavenUser = () => {
             Session.getCurrentUser()
@@ -90,10 +98,13 @@ DecafAppModule.config((appNameProvider, appAuthProvider, potionProvider, decafAP
         };
         if (Session.isAuthenticated()) {
             setRavenUser();
+        } else {
+            $window.localStorage.setItem('sessionJWT', process.env.GUEST_TOKEN);
         }
         $rootScope.$on('session:login', setRavenUser);
         $rootScope.$on('session:logout', () => {
             Raven.setUserContext();
+            $window.localStorage.setItem('sessionJWT', process.env.GUEST_TOKEN);
         });
     }
 });

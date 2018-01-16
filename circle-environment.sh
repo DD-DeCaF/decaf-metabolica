@@ -13,6 +13,7 @@ if [ "${CIRCLE_BRANCH}" == "master" ]; then
   export PATHWAYS_API=${PATHWAYS_API_PROD}
   export PATHWAYS_WS=${PATHWAYS_WS_PROD}
   export SENTRY_DSN=${SENTRY_DSN_PROD}
+  export GA_TRACKING_CODE=${GA_TRACKING_CODE_PROD}
 else
   export ENVIRONMENT=staging
   export TRUSTED_URLS=${TRUSTED_URLS_STAGING}
@@ -25,6 +26,7 @@ else
   export PATHWAYS_API=${PATHWAYS_API_STAGING}
   export PATHWAYS_WS=${PATHWAYS_WS_STAGING}
   export SENTRY_DSN=${SENTRY_DSN_STAGING}
+  export GA_TRACKING_CODE=${GA_TRACKING_CODE_STAGING}
 fi
 
 # Run the provided command with this environment

@@ -28,7 +28,7 @@ module.exports = function () {
             new ExtractTextPlugin('[chunkhash].[name].css'),
             new HtmlWebpackPlugin({
                 inject: 'head',
-                template: './src/index.html',
+                template: './src/index.ejs',
                 filename: 'index.html'
             }),
             new webpack.EnvironmentPlugin({
@@ -50,6 +50,7 @@ module.exports = function () {
                 FIREBASE_SENDER_ID: '',
                 SENTRY_DSN: '',
                 GUEST_TOKEN: '',
+                GA_TRACKING_CODE: '',
             })
         ],
         module: {

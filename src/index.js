@@ -112,7 +112,7 @@ DecafAppModule.config((appNameProvider, appAuthProvider, potionProvider, decafAP
         gtag('config', process.env.GA_TRACKING_CODE, {
             page_title: transition.to().data.title,
             page_location: $location.absUrl(),
-            page_path: $location.path()
+            page_path: $location.path(),
         })
     });
 });

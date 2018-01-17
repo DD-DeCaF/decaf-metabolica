@@ -32,6 +32,7 @@ module.exports = function () {
                 filename: 'index.html'
             }),
             new webpack.EnvironmentPlugin({
+                ENVIRONMENT: 'dev',
                 TRUSTED_URLS: 'http://localhost,https://iloop-staging.dd-decaf.eu,https://data.dd-decaf.eu,https://api.dd-decaf.eu,https://api-staging.dd-decaf.eu',
                 POTION_API_HOST: 'https://iloop-staging.dd-decaf.eu',
                 POTION_API_PREFIX: '/api',

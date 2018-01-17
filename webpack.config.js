@@ -32,6 +32,16 @@ module.exports = function () {
                 filename: 'index.html'
             }),
             new webpack.EnvironmentPlugin({
+                ENVIRONMENT: 'dev',
+                TRUSTED_URLS: 'http://localhost,https://iloop-staging.dd-decaf.eu,https://data.dd-decaf.eu,https://api.dd-decaf.eu,https://api-staging.dd-decaf.eu',
+                POTION_API_HOST: 'https://iloop-staging.dd-decaf.eu',
+                POTION_API_PREFIX: '/api',
+                DECAF_API: 'https://api-staging.dd-decaf.eu',
+                MODEL_API: 'https://api-staging.dd-decaf.eu',
+                MODEL_WS_HOST: 'wss://api-staging.dd-decaf.eu',
+                MODEL_WS_PREFIX: '/wsmodels',
+                PATHWAYS_API: 'https://api-staging.dd-decaf.eu/pathways',
+                PATHWAYS_WS: 'wss://api-staging.dd-decaf.eu/pathways',
                 FIREBASE_API_KEY: '',
                 FIREBASE_AUTH_DOMAIN: '',
                 FIREBASE_DATABASE_URL: '',

@@ -58,18 +58,16 @@ DecafAppModule.config((appNameProvider, appAuthProvider, potionProvider, decafAP
 
     appNameProvider.name = 'DD-DeCaF';
     appAuthProvider.isRequired = false;
-    appAuthProvider.trustedURLs.add('https://iloop-staging.dd-decaf.eu');
-    appAuthProvider.trustedURLs.add('https://data.dd-decaf.eu');
-    appAuthProvider.trustedURLs.add('https://api.dd-decaf.eu');
-    appAuthProvider.trustedURLs.add('https://api-staging.dd-decaf.eu');
-    appAuthProvider.trustedURLs.add('http://localhost');
-    potionProvider.config({host: 'https://iloop-staging.dd-decaf.eu', prefix: '/api'});
-    decafAPIProvider.host = 'https://api-staging.dd-decaf.eu';
-    modelAPIProvider.host = 'https://api-staging.dd-decaf.eu';
-    modelWSProvider.host = 'wss://api-staging.dd-decaf.eu';
-    modelWSProvider.prefix = '/wsmodels';
-    pathwaysAPIProvider.host = 'https://api-staging.dd-decaf.eu/pathways';
-    pathwaysWSProvider.host = 'wss://api-staging.dd-decaf.eu/pathways';
+    process.env.TRUSTED_URLS.split(',').forEach((url) => {
+      appAuthProvider.trustedURLs.add(url)
+    });
+    potionProvider.config({host: process.env.POTION_API_HOST, prefix: process.env.POTION_API_PREFIX});
+    decafAPIProvider.host = process.env.DECAF_API;
+    modelAPIProvider.host = process.env.MODEL_API;
+    modelWSProvider.host = process.env.MODEL_WS_HOST;
+    modelWSProvider.prefix = process.env.MODEL_WS_PREFIX;
+    pathwaysAPIProvider.host = process.env.PATHWAYS_API;
+    pathwaysWSProvider.host = process.env.PATHWAYS_WS;
 
 }).config(($mdThemingProvider) => {
     const hostname2ColorScheme = {

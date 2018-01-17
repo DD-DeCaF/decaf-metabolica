@@ -113,7 +113,7 @@ DecafAppModule.config((appNameProvider, appAuthProvider, potionProvider, decafAP
             page_title: transition.to().data.title,
             page_location: $location.absUrl(),
             page_path: $location.path(),
-        })
+        });
     });
 });
 

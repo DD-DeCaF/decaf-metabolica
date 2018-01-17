@@ -108,7 +108,7 @@ DecafAppModule.config((appNameProvider, appAuthProvider, potionProvider, decafAP
     }
 
     // Track page state changes to Google Analytics
-    $transitions.onSuccess({}, function(transition) {
+    $transitions.onSuccess({}, (transition) => {
         gtag('config', process.env.GA_TRACKING_CODE, {
             'page_title': transition.to().data.title,
             'page_location': $location.absUrl(),

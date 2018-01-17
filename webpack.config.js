@@ -32,13 +32,24 @@ module.exports = function () {
                 filename: 'index.html'
             }),
             new webpack.EnvironmentPlugin({
-                FIREBASE_API_KEY: '""',
-                FIREBASE_AUTH_DOMAIN: '""',
-                FIREBASE_DATABASE_URL: '""',
-                FIREBASE_PROJECT_ID: '""',
-                FIREBASE_STORAGE_BUCKET: '""',
-                FIREBASE_SENDER_ID: '""',
-                SENTRY_DSN: '""',
+                ENVIRONMENT: 'dev',
+                TRUSTED_URLS: 'http://localhost,https://iloop-staging.dd-decaf.eu,https://data.dd-decaf.eu,https://api.dd-decaf.eu,https://api-staging.dd-decaf.eu',
+                POTION_API_HOST: 'https://iloop-staging.dd-decaf.eu',
+                POTION_API_PREFIX: '/api',
+                DECAF_API: 'https://api-staging.dd-decaf.eu',
+                MODEL_API: 'https://api-staging.dd-decaf.eu',
+                MODEL_WS_HOST: 'wss://api-staging.dd-decaf.eu',
+                MODEL_WS_PREFIX: '/wsmodels',
+                PATHWAYS_API: 'https://api-staging.dd-decaf.eu/pathways',
+                PATHWAYS_WS: 'wss://api-staging.dd-decaf.eu/pathways',
+                FIREBASE_API_KEY: '',
+                FIREBASE_AUTH_DOMAIN: '',
+                FIREBASE_DATABASE_URL: '',
+                FIREBASE_PROJECT_ID: '',
+                FIREBASE_STORAGE_BUCKET: '',
+                FIREBASE_SENDER_ID: '',
+                SENTRY_DSN: '',
+                GUEST_TOKEN: '',
             })
         ],
         module: {
@@ -116,7 +127,7 @@ module.exports = function () {
             proxy: {
                 '/api': {
                     // Set the following line to the address of the API you want to test against:
-                    target: 'https://data.dd-decaf.eu',
+                    target: 'https://iloop-staging.dd-decaf.eu',
                     secure: false,
                     changeOrigin: true
                 }

@@ -47,20 +47,43 @@ if (process.env.SENTRY_DSN) {
     DecafAppModule.requires.push('ngRaven');
 }
 
-DecafAppModule.config(function (appNameProvider, appAuthProvider, potionProvider, decafAPIProvider, modelWSProvider, modelAPIProvider) {
+
+DecafAppModule.config((appNameProvider, appAuthProvider, potionProvider, decafAPIProvider, modelWSProvider, modelAPIProvider, appNavigationProvider, pathwaysAPIProvider, pathwaysWSProvider) => {
+    const noAuthModules = ['Experiments', 'Pools', 'Media'];
+    appNavigationProvider.navigation
+      .filter((app) => noAuthModules.includes(app.title))
+      .forEach((el) => {
+       el.authRequired = false;
+     });
+
     appNameProvider.name = 'DD-DeCaF';
     appAuthProvider.isRequired = false;
-    appAuthProvider.trustedURLs.add('https://iloop-staging.dd-decaf.eu');
-    appAuthProvider.trustedURLs.add('https://data.dd-decaf.eu');
-    appAuthProvider.trustedURLs.add('https://api.dd-decaf.eu');
-    appAuthProvider.trustedURLs.add('https://api-staging.dd-decaf.eu');
-    appAuthProvider.trustedURLs.add('http://localhost');
-    potionProvider.config({host: 'https://data.dd-decaf.eu', prefix: '/api'});
-    decafAPIProvider.host = 'https://api.dd-decaf.eu';
-    modelAPIProvider.host = 'https://api.dd-decaf.eu';
-    modelWSProvider.host = 'wss://api.dd-decaf.eu';
-    modelWSProvider.prefix = '/wsmodels';
-}).run(($rootScope, Session) => {
+    process.env.TRUSTED_URLS.split(',').forEach((url) => {
+      appAuthProvider.trustedURLs.add(url)
+    });
+    potionProvider.config({host: process.env.POTION_API_HOST, prefix: process.env.POTION_API_PREFIX});
+    decafAPIProvider.host = process.env.DECAF_API;
+    modelAPIProvider.host = process.env.MODEL_API;
+    modelWSProvider.host = process.env.MODEL_WS_HOST;
+    modelWSProvider.prefix = process.env.MODEL_WS_PREFIX;
+    pathwaysAPIProvider.host = process.env.PATHWAYS_API;
+    pathwaysWSProvider.host = process.env.PATHWAYS_WS;
+
+}).config(($mdThemingProvider) => {
+    const environment2ColorScheme = {
+        'dev': 'light-green',
+        'staging': 'amber',
+        'prod': 'light-blue',
+    };
+    const color = environment2ColorScheme[process.env.ENVIRONMENT] || 'light-blue';
+    $mdThemingProvider.theme('default')
+        .primaryPalette(color, {
+            'default': '700'
+        })
+        .accentPalette(color, {
+            'default': '400',
+        });
+}).run(($rootScope, $window, Session) => {
     if (process.env.SENTRY_DSN) {
         const setRavenUser = () => {
             Session.getCurrentUser()
@@ -73,10 +96,13 @@ DecafAppModule.config(function (appNameProvider, appAuthProvider, potionProvider
         };
         if (Session.isAuthenticated()) {
             setRavenUser();
+        } else {
+            $window.localStorage.setItem('sessionJWT', process.env.GUEST_TOKEN);
         }
         $rootScope.$on('session:login', setRavenUser);
         $rootScope.$on('session:logout', () => {
             Raven.setUserContext();
+            $window.localStorage.setItem('sessionJWT', process.env.GUEST_TOKEN);
         });
     }
 });

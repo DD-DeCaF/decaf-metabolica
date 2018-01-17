@@ -70,12 +70,12 @@ DecafAppModule.config((appNameProvider, appAuthProvider, potionProvider, decafAP
     pathwaysWSProvider.host = process.env.PATHWAYS_WS;
 
 }).config(($mdThemingProvider) => {
-    const hostname2ColorScheme = {
-        'localhost': 'light-green',
-        'app.dd-decaf.eu': 'light-blue',
-        'staging.dd-decaf.eu': 'amber',
+    const environment2ColorScheme = {
+        'dev': 'light-green',
+        'staging': 'amber',
+        'prod': 'light-blue',
     };
-    const color = hostname2ColorScheme[window.location.hostname] || 'light-blue';
+    const color = environment2ColorScheme[process.env.ENVIRONMENT] || 'light-blue';
     $mdThemingProvider.theme('default')
         .primaryPalette(color, {
             'default': '700'

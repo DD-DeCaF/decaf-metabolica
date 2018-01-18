@@ -79,9 +79,6 @@ DecafAppModule.config((appNameProvider, appAuthProvider, potionProvider, decafAP
     $mdThemingProvider.theme('default')
         .primaryPalette(color, {
             'default': '700'
-        })
-        .accentPalette(color, {
-            'default': '400',
         });
 }).run(($rootScope, $window, Session, $transitions, $location) => {
     // Configure Raven

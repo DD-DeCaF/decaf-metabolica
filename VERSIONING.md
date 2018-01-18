@@ -17,7 +17,7 @@ decaf-metabolica integrates its [metabolica components as npm packages](https://
 
 1. Work on `metabolica-ui-foo` and merge or push your commits to `devel`.
 2. Checkout `devel` on `decaf-metabolica` and update the `package.json` dependency: `.../metabolica-ui-foo#devel`.
-3. Redeploy the `decaf-metabolica` staging service.
+3. Trigger a CI rebuild and then redeploy the `decaf-metabolica` staging service.
 
 ## Deploying to production 
 

@@ -80,7 +80,7 @@ DecafAppModule.config((appNameProvider, appAuthProvider, potionProvider, decafAP
         .primaryPalette(color, {
             'default': '700'
         });
-}).run(($rootScope, $window, Session, $transitions, $location) => {
+}).run(($rootScope, $localStorage, Session, $transitions, $location) => {
     // Configure Raven
     if (process.env.SENTRY_DSN) {
         const setRavenUser = () => {
@@ -94,16 +94,18 @@ DecafAppModule.config((appNameProvider, appAuthProvider, potionProvider, decafAP
         };
         if (Session.isAuthenticated()) {
             setRavenUser();
-        } else {
-            $window.localStorage.setItem('sessionJWT', process.env.GUEST_TOKEN);
         }
         $rootScope.$on('session:login', setRavenUser);
         $rootScope.$on('session:logout', () => {
             Raven.setUserContext();
-            $window.localStorage.setItem('sessionJWT', process.env.GUEST_TOKEN);
         });
     }
-
+    if (!Session.isAuthenticated()) {
+        $localStorage['sessionJWT'] = process.env.GUEST_TOKEN;
+    }
+    $rootScope.$on('session:logout', () => {
+        $localStorage['sessionJWT'] = process.env.GUEST_TOKEN;
+    });
     // Track page state changes to Google Analytics
     $transitions.onSuccess({}, (transition) => {
         gtag('config', process.env.GA_TRACKING_CODE, {

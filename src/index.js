@@ -79,11 +79,9 @@ DecafAppModule.config((appNameProvider, appAuthProvider, potionProvider, decafAP
     $mdThemingProvider.theme('default')
         .primaryPalette(color, {
             'default': '700'
-        })
-        .accentPalette(color, {
-            'default': '400',
         });
-}).run(($rootScope, $window, Session) => {
+}).run(($rootScope, $window, Session, $transitions, $location) => {
+    // Configure Raven
     if (process.env.SENTRY_DSN) {
         const setRavenUser = () => {
             Session.getCurrentUser()
@@ -105,6 +103,15 @@ DecafAppModule.config((appNameProvider, appAuthProvider, potionProvider, decafAP
             $window.localStorage.setItem('sessionJWT', process.env.GUEST_TOKEN);
         });
     }
+
+    // Track page state changes to Google Analytics
+    $transitions.onSuccess({}, (transition) => {
+        gtag('config', process.env.GA_TRACKING_CODE, {
+            page_title: transition.to().data.title,
+            page_location: $location.absUrl(),
+            page_path: $location.path(),
+        });
+    });
 });
 
 export {DecafAppModule};

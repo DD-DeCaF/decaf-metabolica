@@ -17,7 +17,7 @@ decaf-metabolica integrates its [metabolica components as npm packages](https://
 
 1. Work on `metabolica-ui-foo` and merge or push your commits to `devel`.
 2. Checkout `devel` on `decaf-metabolica` and update the `package.json` dependency: `.../metabolica-ui-foo#devel`.
-3. Trigger a CI rebuild and then redeploy the `decaf-metabolica` staging service.
+3. Trigger a [CI rebuild](https://circleci.com/gh/DD-DeCaF/decaf-metabolica/tree/devel) and then redeploy the `decaf-metabolica` staging service.
 
 ## Deploying to production 
 
@@ -28,4 +28,5 @@ decaf-metabolica integrates its [metabolica components as npm packages](https://
 3. Go to `decaf-metabolica` `devel` and update `package.json`: `.../metabolica-ui-foo#vX.Y.Z`.
 4. Merge `devel` into `master`.
     * You **must not** do this if `package.json` contains any dependencies to `#devel` branches. Either merge the branch in the remote package or roll back to the previous version.
-4. Redeploy `decaf-metabolica` production service.
+5. Wait for [CI](https://circleci.com/gh/DD-DeCaF/decaf-metabolica/tree/devel) to finish
+6. Redeploy `decaf-metabolica` production service.

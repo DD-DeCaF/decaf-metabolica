@@ -80,7 +80,7 @@ DecafAppModule.config((appNameProvider, appAuthProvider, potionProvider, decafAP
         .primaryPalette(color, {
             'default': '700'
         });
-}).run(($rootScope, $localStorage, Session, $transitions, $location) => {
+}).run(($rootScope, $localStorage, Session, $transitions, $location, appName) => {
     // Configure Raven
     if (process.env.SENTRY_DSN) {
         const setRavenUser = () => {
@@ -109,7 +109,7 @@ DecafAppModule.config((appNameProvider, appAuthProvider, potionProvider, decafAP
     // Track page state changes to Google Analytics
     $transitions.onSuccess({}, (transition) => {
         gtag('config', process.env.GA_TRACKING_CODE, {
-            page_title: transition.to().data.title,
+            page_title: (transition.to().data && transition.to().data.title) || appName,
             page_location: $location.absUrl(),
             page_path: $location.path(),
         });

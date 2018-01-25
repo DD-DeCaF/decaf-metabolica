@@ -10,6 +10,7 @@ import {ExperimentsModule} from 'metabolica-core';
 import {SettingsModule} from 'metabolica-core';
 import {MediaModule} from 'metabolica-core';
 
+import {HomeModule} from 'metabolica-home';
 import {VariantsModule} from 'metabolica-variants';
 import {VizModule} from 'metabolica-viz';
 import {PathwaysModule} from 'metabolica-pathways';
@@ -24,6 +25,7 @@ import './style.scss';
 
 const DecafAppModule = angular.module('DecafApp', [
     AppModule.name,
+    HomeModule.name,
     MaintenanceModule.name,
     ProjectModule.name,
     PoolsModule.name,

@@ -8,6 +8,7 @@
     "metabolica": "github:biosustain/metabolica-ui",
     "metabolica-about": "github:DD-DeCaF/metabolica-ui-about#v1.0.0",
     "metabolica-core": "github:biosustain/metabolica-ui-core",
+    "metabolica-home": "github:DD-DeCaF/metabolica-ui-home#devel",
     "metabolica-login": "github:DD-DeCaF/metabolica-ui-login#v1.0.0",
     "metabolica-map": "github:DD-DeCaF/metabolica-ui-map#v1.1.1",
     "metabolica-pathways": "github:DD-DeCaF/metabolica-ui-pathways#v1.1.1",

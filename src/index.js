@@ -81,7 +81,7 @@ DecafAppModule.config((appNameProvider, appAuthProvider, potionProvider, decafAP
             'default': '700'
         });
 }).run(($rootScope, $localStorage, Session, $transitions, $location, appName) => {
-    // Configure Raven
+    // Configure Raven user
     if (process.env.SENTRY_DSN) {
         const setRavenUser = () => {
             Session.getCurrentUser()
@@ -106,8 +106,10 @@ DecafAppModule.config((appNameProvider, appAuthProvider, potionProvider, decafAP
     $rootScope.$on('session:logout', () => {
         $localStorage['sessionJWT'] = process.env.GUEST_TOKEN;
     });
+
     // Track page state changes to Google Analytics
     $transitions.onSuccess({}, (transition) => {
+        // Exceptions in ui-router hooks don't bubble, so capture them with raven explicitly
         try {
             gtag('config', process.env.GA_TRACKING_CODE, {
                 page_title: (transition.to().data && transition.to().data.title) || appName,

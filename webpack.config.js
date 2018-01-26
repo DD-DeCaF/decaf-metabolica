@@ -118,7 +118,7 @@ module.exports = function () {
                     loader: 'html-loader'
                 },
                 {
-                    test: /\.(jpe?g|png|svg)$/,
+                    test: /\.(jpe?g|png|svg|gif)$/,
                     loader: 'file-loader?name=img/[hash:8].[name].[ext]'
                 }
             ]

@@ -52,7 +52,7 @@ module.exports = function () {
                 FIREBASE_STORAGE_BUCKET: '',
                 FIREBASE_SENDER_ID: '',
                 SENTRY_DSN: '',
-                GUEST_TOKEN: '',
+                GUEST_TOKEN: '0b8c839d3a69fc74f3f6ab895f0949ce',
                 GA_TRACKING_CODE: '',
             })
         ],

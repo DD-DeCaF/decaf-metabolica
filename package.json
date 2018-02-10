@@ -15,7 +15,7 @@
     "metabolica-upload": "github:DD-DeCaF/metabolica-ui-upload#v1.0.1",
     "metabolica-variants": "github:biosustain/metabolica-ui-variants",
     "metabolica-viz": "github:biosustain/metabolica-ui-viz",
-    "metabolica-yields": "github:DD-DeCaF/metabolica-ui-yields#v1.0.0",
+    "metabolica-yields": "github:DD-DeCaF/metabolica-ui-yields#devel",
     "raven-js": "^3.20.1"
   },
   "scripts": {

@@ -10,6 +10,7 @@ import {ExperimentsModule} from 'metabolica-core';
 import {SettingsModule} from 'metabolica-core';
 import {MediaModule} from 'metabolica-core';
 
+import {HomeModule} from 'metabolica-home';
 import {VariantsModule} from 'metabolica-variants';
 import {VizModule} from 'metabolica-viz';
 import {PathwaysModule} from 'metabolica-pathways';
@@ -24,6 +25,7 @@ import './style.scss';
 
 const DecafAppModule = angular.module('DecafApp', [
     AppModule.name,
+    HomeModule.name,
     MaintenanceModule.name,
     ProjectModule.name,
     PoolsModule.name,
@@ -80,8 +82,8 @@ DecafAppModule.config((appNameProvider, appAuthProvider, potionProvider, decafAP
         .primaryPalette(color, {
             'default': '700'
         });
-}).run(($rootScope, $localStorage, Session, $transitions, $location) => {
-    // Configure Raven
+}).run(($rootScope, $localStorage, Session, $transitions, $location, appName) => {
+    // Configure Raven user
     if (process.env.SENTRY_DSN) {
         const setRavenUser = () => {
             Session.getCurrentUser()
@@ -106,13 +108,19 @@ DecafAppModule.config((appNameProvider, appAuthProvider, potionProvider, decafAP
     $rootScope.$on('session:logout', () => {
         $localStorage['sessionJWT'] = process.env.GUEST_TOKEN;
     });
+
     // Track page state changes to Google Analytics
     $transitions.onSuccess({}, (transition) => {
-        gtag('config', process.env.GA_TRACKING_CODE, {
-            page_title: transition.to().data.title,
-            page_location: $location.absUrl(),
-            page_path: $location.path(),
-        });
+        // Exceptions in ui-router hooks don't bubble, so capture them with raven explicitly
+        try {
+            gtag('config', process.env.GA_TRACKING_CODE, {
+                page_title: (transition.to().data && transition.to().data.title) || appName,
+                page_location: $location.absUrl(),
+                page_path: $location.path(),
+            });
+        } catch(ex) {
+            Raven.captureException(ex);
+        }
     });
 });
 

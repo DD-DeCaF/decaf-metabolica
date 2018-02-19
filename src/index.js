@@ -104,12 +104,6 @@ DecafAppModule.config((appNameProvider, appAuthProvider, potionProvider, decafAP
             Raven.setUserContext();
         });
     }
-    if (!Session.isAuthenticated()) {
-        $localStorage['sessionJWT'] = process.env.GUEST_TOKEN;
-    }
-    $rootScope.$on('session:logout', () => {
-        $localStorage['sessionJWT'] = process.env.GUEST_TOKEN;
-    });
 
     // Track page state changes to Google Analytics
     $transitions.onSuccess({}, (transition) => {

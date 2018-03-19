@@ -50,7 +50,7 @@ if (process.env.SENTRY_DSN) {
 }
 
 
-DecafAppModule.config((appNameProvider, appAuthProvider, potionProvider, decafAPIProvider, modelWSProvider, modelAPIProvider, appNavigationProvider, pathwaysAPIProvider, pathwaysWSProvider) => {
+DecafAppModule.config((appNameProvider, appAuthProvider, potionProvider, decafAPIProvider, modelWSProvider, modelAPIProvider, appNavigationProvider, pathwaysWSProvider) => {
     const noAuthModules = ['Experiments', 'Pools', 'Media'];
     appNavigationProvider.navigation
       .filter((app) => noAuthModules.includes(app.title))
@@ -68,7 +68,6 @@ DecafAppModule.config((appNameProvider, appAuthProvider, potionProvider, decafAP
     modelAPIProvider.host = process.env.MODEL_API;
     modelWSProvider.host = process.env.MODEL_WS_HOST;
     modelWSProvider.prefix = process.env.MODEL_WS_PREFIX;
-    pathwaysAPIProvider.host = process.env.PATHWAYS_API;
     pathwaysWSProvider.host = process.env.PATHWAYS_WS;
 
 }).config(($mdThemingProvider) => {

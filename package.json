@@ -5,7 +5,7 @@
   "types": "src/index.d.ts",
   "dependencies": {
     "angular": "^1.6.2",
-    "metabolica": "github:DD-DeCaF/metabolica-ui",
+    "metabolica": "github:biosustain/metabolica-ui",
     "metabolica-about": "github:DD-DeCaF/metabolica-ui-about#v1.0.0",
     "metabolica-core": "github:biosustain/metabolica-ui-core",
     "metabolica-home": "github:DD-DeCaF/metabolica-ui-home#v1.0.2",

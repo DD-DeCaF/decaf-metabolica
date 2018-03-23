@@ -14,7 +14,10 @@ module.exports = function () {
             path: path.resolve(__dirname, 'dist')
         },
         resolve: {
-            extensions: ['.ts', '.tsx', '.js']
+            extensions: ['.ts', '.tsx', '.js'],
+            // To support `npm link` for metabolica components, do not resolve symlinks.
+            // See: https://github.com/babel/babel-loader/issues/149
+            symlinks: false,
         },
         plugins: [
             new webpack.optimize.CommonsChunkPlugin({
@@ -49,7 +52,7 @@ module.exports = function () {
                 FIREBASE_STORAGE_BUCKET: '',
                 FIREBASE_SENDER_ID: '',
                 SENTRY_DSN: '',
-                GUEST_TOKEN: '',
+                GUEST_TOKEN: '0b8c839d3a69fc74f3f6ab895f0949ce',
                 GA_TRACKING_CODE: '',
             })
         ],
@@ -71,20 +74,28 @@ module.exports = function () {
                         }]
                     })
                 },
-                { 	test: /\.tsx?$/,
+                {
+                    test: /\.tsx?$/,
                     loader: "ts-loader",
                     include: [
+                        // Project source
                         path.resolve(__dirname, 'src'),
-                        __dirname,
+
+                        // Metabolica core components
                         path.dirname(require.resolve('metabolica')),
                         path.dirname(require.resolve('metabolica-core')),
                         path.dirname(require.resolve('metabolica-variants')),
                         path.dirname(require.resolve('metabolica-viz')),
-                        path.dirname(require.resolve('metabolica-pathways')),
-                        path.dirname(require.resolve('metabolica-yields')),
-                        path.dirname(require.resolve('metabolica-map')),
-                        path.dirname(require.resolve('metabolica-upload')),
-                        path.dirname(require.resolve('metabolica-about'))
+
+                        // DD-DeCaF components
+                        // Avoid use of `require.resolve` to support `npm link` for local development
+                        path.resolve(__dirname, 'node_modules', 'metabolica-home', 'src'),
+                        path.resolve(__dirname, 'node_modules', 'metabolica-about', 'src'),
+                        path.resolve(__dirname, 'node_modules', 'metabolica-login', 'src'),
+                        path.resolve(__dirname, 'node_modules', 'metabolica-upload', 'src'),
+                        path.resolve(__dirname, 'node_modules', 'metabolica-pathways', 'src'),
+                        path.resolve(__dirname, 'node_modules', 'metabolica-yields', 'src'),
+                        path.resolve(__dirname, 'node_modules', 'metabolica-map', 'src'),
                     ],
                     options: {
                         transpileOnly: true,  // FIXME hack for prototyping purposes because dependencies are broken
@@ -94,16 +105,24 @@ module.exports = function () {
                 {
                     test: /\.js$/,
                     include: [
+                        // Project source
                         path.resolve(__dirname, 'src'),
+
+                        // Metabolica core components
                         path.dirname(require.resolve('metabolica')),
                         path.dirname(require.resolve('metabolica-core')),
                         path.dirname(require.resolve('metabolica-variants')),
                         path.dirname(require.resolve('metabolica-viz')),
-                        path.dirname(require.resolve('metabolica-pathways')),
-                        path.dirname(require.resolve('metabolica-yields')),
-                        path.dirname(require.resolve('metabolica-map')),
-                        path.dirname(require.resolve('metabolica-upload')),
-                        path.dirname(require.resolve('metabolica-about'))
+
+                        // DD-DeCaF components
+                        // Avoid use of `require.resolve` to support `npm link` for local development
+                        path.resolve(__dirname, 'node_modules', 'metabolica-home', 'src'),
+                        path.resolve(__dirname, 'node_modules', 'metabolica-about', 'src'),
+                        path.resolve(__dirname, 'node_modules', 'metabolica-login', 'src'),
+                        path.resolve(__dirname, 'node_modules', 'metabolica-upload', 'src'),
+                        path.resolve(__dirname, 'node_modules', 'metabolica-pathways', 'src'),
+                        path.resolve(__dirname, 'node_modules', 'metabolica-yields', 'src'),
+                        path.resolve(__dirname, 'node_modules', 'metabolica-map', 'src'),
                     ],
                     loader: 'babel-loader',
                     query: {

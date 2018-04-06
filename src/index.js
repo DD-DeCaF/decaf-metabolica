@@ -64,26 +64,39 @@ if (process.env.SENTRY_DSN) {
 }
 
 
-DecafAppModule.config((appNameProvider, appAuthProvider, potionProvider, decafAPIProvider, modelWSProvider, modelAPIProvider, appNavigationProvider, pathwaysAPIProvider, pathwaysWSProvider) => {
-    const noAuthModules = ['Experiments', 'Pools', 'Media'];
-    appNavigationProvider.navigation
-      .filter((app) => noAuthModules.includes(app.title))
-      .forEach((el) => {
-       el.authRequired = false;
-     });
+DecafAppModule.config((
+    appNameProvider, 
+    appAuthProvider, 
+    potionProvider, 
+    decafAPIProvider,
+    modelWSProvider,
+    modelAPIProvider,
+    appNavigationProvider,
+    pathwaysAPIProvider,
+    pathwaysWSProvider, 
+    loggerProvider) => {
+        const noAuthModules = ['Experiments', 'Pools', 'Media'];
+        appNavigationProvider.navigation
+        .filter((app) => noAuthModules.includes(app.title))
+        .forEach((el) => {
+        el.authRequired = false;
+        });
 
-    appNameProvider.name = 'DD-DeCaF';
-    appAuthProvider.isRequired = false;
-    process.env.TRUSTED_URLS.split(',').forEach((url) => {
-      appAuthProvider.trustedURLs.add(url)
-    });
-    potionProvider.config({host: process.env.POTION_API_HOST, prefix: process.env.POTION_API_PREFIX});
-    decafAPIProvider.host = process.env.DECAF_API;
-    modelAPIProvider.host = process.env.MODEL_API;
-    modelWSProvider.host = process.env.MODEL_WS_HOST;
-    modelWSProvider.prefix = process.env.MODEL_WS_PREFIX;
-    pathwaysAPIProvider.host = process.env.PATHWAYS_API;
-    pathwaysWSProvider.host = process.env.PATHWAYS_WS;
+        appNameProvider.name = 'DD-DeCaF';
+        appAuthProvider.isRequired = false;
+        process.env.TRUSTED_URLS.split(',').forEach((url) => {
+        appAuthProvider.trustedURLs.add(url)
+        });
+        potionProvider.config({host: process.env.POTION_API_HOST, prefix: process.env.POTION_API_PREFIX});
+        decafAPIProvider.host = process.env.DECAF_API;
+        modelAPIProvider.host = process.env.MODEL_API;
+        modelWSProvider.host = process.env.MODEL_WS_HOST;
+        modelWSProvider.prefix = process.env.MODEL_WS_PREFIX;
+        pathwaysAPIProvider.host = process.env.PATHWAYS_API;
+        pathwaysWSProvider.host = process.env.PATHWAYS_WS;
+        loggerProvider.loggerFunction = (...args) => {
+            window.gtag(...args);
+        }
 
 }).config(($mdThemingProvider) => {
     const environment2ColorScheme = {

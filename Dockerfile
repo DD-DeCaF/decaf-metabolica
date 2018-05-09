@@ -1,6 +1,4 @@
-FROM alpine:latest
-RUN mkdir -p /usr/share/decaf/frontend
-ADD . /usr/share/decaf/frontend
-WORKDIR /usr/share/decaf/frontend
-
-RUN chmod -R 755 /usr/share/decaf/frontend/dist
+FROM nginx:1.13
+# RUN mkdir -p /usr/share/decaf/frontend
+COPY dist /usr/share/nginx/html
+COPY nginx.conf /etc/nginx/nginx.conf

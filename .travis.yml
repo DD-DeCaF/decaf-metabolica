@@ -1,3 +1,5 @@
+# Not in use: currenlty circle CI is being used
+# Because Travis doesn't let you build from private github dependencies
 sudo: required
 language: python
 services:

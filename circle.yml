@@ -5,13 +5,14 @@ jobs:
       - image: circleci/node:9.11.1-browsers
     steps:
       - checkout
+      - run: sudo npm install -g npm@latest
       - run: npm ci
       - run: ./circle-environment.sh npm run build
       - persist_to_workspace:
           root: .
           paths:
             - dist
-  build_docker:
+  build-docker:
     docker:
       - image: circleci/node:9.11.1-browsers
     steps:
@@ -27,9 +28,9 @@ workflows:
   # build:
   #   jobs:
   #     - build
-  build_and_push:
+  build-and-push:
     jobs:
       - build
-      - build_docker:
+      - build-docker:
         requires:
           - build

@@ -2,13 +2,11 @@ machine:
   services:
     - docker
   node:
-    version: 7.0.0
+    version: 9.11.1
 dependencies:
   override:
     - "docker info"
-    - "npm install --no-optional"
-    - "npm update"
-    - "npm prune"
+    - "npm ci"
     - "./circle-environment.sh npm run build"
 test:
   override:

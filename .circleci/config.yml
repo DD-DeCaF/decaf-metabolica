@@ -2,10 +2,9 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/node:9.11.1-browsers
+      - image: matyasfodor/node-npm:9-6
     steps:
       - checkout
-      - run: sudo npm install -g npm@latest
       - run: npm ci
       - run: ./circle-environment.sh npm run build
       - persist_to_workspace:

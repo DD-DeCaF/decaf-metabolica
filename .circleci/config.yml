@@ -20,7 +20,7 @@ jobs:
       - attach_workspace:
           at: dist
       - run: docker info
-      - run: docker login -u=$DOCKER_USERNAME -p=$DOCKER_PASSWORD -e=$DOCKER_EMAIL
+      - run: docker login -u=$DOCKER_USERNAME -p=$DOCKER_PASSWORD
       - run: ./push_to_hub.sh
 workflows:
   version: 2

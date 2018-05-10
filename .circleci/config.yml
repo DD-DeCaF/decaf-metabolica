@@ -18,19 +18,15 @@ jobs:
     steps:
       - checkout
       - attach_workspace:
-        # Must be absolute path or relative path from working_directory
-        at: dist
+          at: dist
       - run: docker info
       - run: docker login -u=$DOCKER_USERNAME -p=$DOCKER_PASSWORD -e=$DOCKER_EMAIL
       - run: ./push_to_hub.sh
 workflows:
   version: 2
-  # build:
-  #   jobs:
-  #     - build
   build-and-push:
     jobs:
       - build
       - build-docker:
-        requires:
-          - build
+          requires:
+            - build

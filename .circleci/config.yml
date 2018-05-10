@@ -13,7 +13,7 @@ jobs:
             - dist
   build-docker:
     docker:
-      - image: circleci/build-image
+      - image: matyasfodor/node-npm:9-6
     steps:
       - checkout
       - setup_remote_docker

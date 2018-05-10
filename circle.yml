@@ -1,25 +1,35 @@
-machine:
-  services:
-    - docker
-  node:
-    version: 9.11.1
-dependencies:
-  override:
-    - "docker info"
-    - "npm ci"
-    - "./circle-environment.sh npm run build"
-test:
-  override:
-    - "echo 'You shall pass!'"
-deployment:
-  production:
-    branch: master
-    commands:
-      - "docker login -u=$DOCKER_USERNAME -p=$DOCKER_PASSWORD -e=$DOCKER_EMAIL"
-      - "./push_to_hub.sh"
-  staging:
-    branch: devel
-    commands:
-      - "docker login -u=$DOCKER_USERNAME -p=$DOCKER_PASSWORD -e=$DOCKER_EMAIL"
-      - "./push_to_hub.sh"
-
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/node:9.11.1-browsers
+    steps:
+      - checkout
+      - run: npm ci
+      - run: ./circle-environment.sh npm run build
+      - persist_to_workspace:
+          root: .
+          paths:
+            - dist
+  build_docker:
+    docker:
+      - image: circleci/node:9.11.1-browsers
+    steps:
+      - checkout
+      - attach_workspace:
+        # Must be absolute path or relative path from working_directory
+        at: dist
+      - run: docker info
+      - run: docker login -u=$DOCKER_USERNAME -p=$DOCKER_PASSWORD -e=$DOCKER_EMAIL
+      - run: ./push_to_hub.sh
+workflows:
+  version: 2
+  # build:
+  #   jobs:
+  #     - build
+  build_and_push:
+    jobs:
+      - build
+      - build_docker:
+        requires:
+          - build

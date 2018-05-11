@@ -6,7 +6,7 @@ jobs:
     steps:
       - checkout
       - run: npm ci
-      - run: ./circle-environment.sh npm run build
+      - run: ./.circleci/environment.sh npm run build
       - persist_to_workspace:
           root: .
           paths:
@@ -21,7 +21,7 @@ jobs:
           at: dist
       - run: docker info
       - run: docker login -u=$DOCKER_USERNAME -p=$DOCKER_PASSWORD
-      - run: ./push_to_hub.sh
+      - run: ./.circleci/push_to_hub.sh
 workflows:
   version: 2
   build:

@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: decaf-metabolica-production
+spec:
+  selector:
+    matchLabels:
+      app: decaf-metabolica
+      env: production
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: decaf-metabolica
+        env: production
+    spec:
+      containers:
+      - name: web
+        image: gcr.io/dd-decaf-cfbf6/decaf-metabolica:master
+        ports:
+        - containerPort: 80
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: decaf-metabolica-staging
+spec:
+  selector:
+    matchLabels:
+      app: decaf-metabolica
+      env: staging
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: decaf-metabolica
+        env: staging
+    spec:
+      containers:
+      - name: web
+        image: gcr.io/dd-decaf-cfbf6/decaf-metabolica:devel
+        ports:
+        - containerPort: 80

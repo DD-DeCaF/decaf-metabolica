@@ -1,0 +1,25 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: decaf-metabolica
+spec:
+  tls:
+  - hosts:
+    - app.dd-decaf.eu
+    - staging.dd-decaf.eu
+    secretName: decaf-tls
+  rules:
+  - host: app.dd-decaf.eu
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: decaf-metabolica-production
+          servicePort: 80
+  - host: staging.dd-decaf.eu
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: decaf-metabolica-staging
+          servicePort: 80

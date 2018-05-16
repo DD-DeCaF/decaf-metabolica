@@ -1,0 +1,18 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/node:9.11.1
+    environment:
+      REPO: "gcr.io/dd-decaf-cfbf6/decaf-metabolica"
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run: npm install
+      - run: ./.circleci/environment.sh npm run build
+      - run: ./.circleci/install_gcloud.sh
+      - run: ./.circleci/install_kubectl.sh
+      - run: docker build -t $REPO:$CIRCLE_BRANCH -t $REPO:${CIRCLE_SHA1::12} .
+      - run: docker push $REPO:$CIRCLE_BRANCH
+      - run: docker push $REPO:${CIRCLE_SHA1::12}
+      - run: ./.circleci/deploy.sh

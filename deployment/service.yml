@@ -1,0 +1,35 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: decaf-metabolica-production
+  annotations:
+    prometheus.io/probe: "true"
+    prometheus.io/port: "9121"
+spec:
+  selector:
+    app: decaf-metabolica
+    env: production
+  ports:
+  - name: web
+    protocol: TCP
+    port: 80
+    targetPort: 80
+
+---
+
+kind: Service
+apiVersion: v1
+metadata:
+  name: decaf-metabolica-staging
+  annotations:
+    prometheus.io/probe: "true"
+    prometheus.io/port: "9121"
+spec:
+  selector:
+    app: decaf-metabolica
+    env: staging
+  ports:
+  - name: web
+    protocol: TCP
+    port: 80
+    targetPort: 80

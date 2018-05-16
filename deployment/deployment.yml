@@ -19,6 +19,11 @@ spec:
         image: gcr.io/dd-decaf-cfbf6/decaf-metabolica:master
         ports:
         - containerPort: 80
+        resources:
+          requests:
+            cpu: "100m"
+          limits:
+            cpu: "1000m"
 
 ---
 
@@ -43,3 +48,8 @@ spec:
         image: gcr.io/dd-decaf-cfbf6/decaf-metabolica:devel
         ports:
         - containerPort: 80
+        resources:
+          requests:
+            cpu: "10m"
+          limits:
+            cpu: "100m"

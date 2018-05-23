@@ -19,6 +19,7 @@ import {PathwayVisModule} from 'metabolica-map';
 import {UploadModule} from 'metabolica-upload';
 import {AboutModule} from 'metabolica-about';
 import {LoginModule} from 'metabolica-login';
+import {SessionModule} from 'metabolica-login';
 
 import './style.scss';
 
@@ -40,7 +41,8 @@ const DecafAppModule = angular.module('DecafApp', [
     TheoreticalYieldModule.name,
     PathwayVisModule.name,
     LoginModule.name,
-    AboutModule.name
+    AboutModule.name,
+    SessionModule.name,
 ]);
 
 if (process.env.SENTRY_DSN) {
@@ -115,12 +117,6 @@ DecafAppModule.config((
             Raven.setUserContext();
         });
     }
-    if (!Session.isAuthenticated()) {
-        $localStorage['sessionJWT'] = process.env.GUEST_TOKEN;
-    }
-    $rootScope.$on('session:logout', () => {
-        $localStorage['sessionJWT'] = process.env.GUEST_TOKEN;
-    });
 
     // Track page state changes to Google Analytics
     $transitions.onSuccess({}, (transition) => {

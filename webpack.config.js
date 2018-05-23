@@ -42,6 +42,7 @@ module.exports = function () {
                 MODEL_WS_PREFIX: '/wsmodels',
                 PATHWAYS_API: 'https://api-staging.dd-decaf.eu/pathways',
                 PATHWAYS_WS: 'wss://api-staging.dd-decaf.eu/pathways',
+                IAM_API: 'https://api-staging.dd-decaf.eu/iam',
                 FIREBASE_API_KEY: '',
                 FIREBASE_AUTH_DOMAIN: '',
                 FIREBASE_DATABASE_URL: '',
@@ -49,7 +50,6 @@ module.exports = function () {
                 FIREBASE_STORAGE_BUCKET: '',
                 FIREBASE_SENDER_ID: '',
                 SENTRY_DSN: '',
-                GUEST_TOKEN: '',
                 GA_TRACKING_CODE: '',
             })
         ],

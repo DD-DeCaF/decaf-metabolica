@@ -4,7 +4,6 @@ metadata:
   name: decaf-metabolica-production
   annotations:
     prometheus.io/probe: "true"
-    prometheus.io/port: "9121"
 spec:
   selector:
     app: decaf-metabolica
@@ -23,7 +22,6 @@ metadata:
   name: decaf-metabolica-staging
   annotations:
     prometheus.io/probe: "true"
-    prometheus.io/port: "9121"
 spec:
   selector:
     app: decaf-metabolica

@@ -2,8 +2,6 @@ kind: Service
 apiVersion: v1
 metadata:
   name: decaf-metabolica-production
-  annotations:
-    prometheus.io/probe: "true"
 spec:
   selector:
     app: decaf-metabolica
@@ -20,8 +18,6 @@ kind: Service
 apiVersion: v1
 metadata:
   name: decaf-metabolica-staging
-  annotations:
-    prometheus.io/probe: "true"
 spec:
   selector:
     app: decaf-metabolica

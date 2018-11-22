@@ -18,8 +18,6 @@ set -xeu
 
 if [ "${CIRCLE_BRANCH}" = "master" ]; then
   DEPLOYMENT=decaf-metabolica-production
-elif [ "${CIRCLE_BRANCH}" = "devel" ]; then
-  DEPLOYMENT=decaf-metabolica-staging
 else
   echo "Skipping deployment for branch ${CIRCLE_BRANCH}"
   exit 0
